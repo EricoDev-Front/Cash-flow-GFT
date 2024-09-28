@@ -1,0 +1,85 @@
+.cash-flow-form-container {
+    border-radius: 5px;
+    border: 1px solid var(--primary-bg-input);
+    background: var(--white);
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.cash-flow-form-container__box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.cash-flow-form-container__box--label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--label);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.cash-flow-form-container__box--select {
+    border-radius: 5px;
+    border: 1px solid var(--primary-bg-input);
+    height: 32px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+    padding: 0px 10px;
+}
+
+.cash-flow-form-container__box--input {
+    border-radius: 5px;
+    border: 1px solid var(--primary-bg-input);
+    height: 32px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+    padding: 0px 10px;
+}
+
+.cash-flow-form-container__box--select:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+}
+
+.cash-flow-form-container__box--input:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+}
+
+.cash-flow-form-container__box.transaction,
+.cash-flow-form-container__box.description {
+    width: 25%;
+}
+
+.cash-flow-form-container__box.amount {
+    width: 15%;
+}
+
+.cash-flow-form-container__box.date {
+    width: 15%;
+
+}
+
+input[type="date" i] {
+    font-family: "Inter", sans-serif !important;
+}
+
+.cash-flow-form-container__button {
+    width: 15%;
+    background: var(--primary);
+    color: var(--white);
+    height: 32px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cash-flow-form-container__button:disabled {
+    background: var(--grey);
+    cursor: no-drop;
+    color: var(--black);
+    font-family: "Inter", sans-serif;
+}

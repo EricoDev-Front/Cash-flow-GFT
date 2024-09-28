@@ -1,0 +1,12 @@
+@import './styles/variables';
+
+* {
+    border: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg-base);
+    font-family: "Inter", sans-serif;
+    padding: 12px;
+}

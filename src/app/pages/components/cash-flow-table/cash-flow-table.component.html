@@ -1,0 +1,56 @@
+<div class="cash-flow-table">
+    <!-- <form class="cash-flow-table-container" [formGroup]="formTable">
+        <div class="cash-flow-table-container__box">
+            <label for="amount" class="cash-flow-form-container__box--label">valor</label>
+            <select formControlName="transactionType" name="transactionType" type="text"
+                class="cash-flow-form-container__box--select">
+                <option disabled selected hidden>Entrada/Saída</option>
+                <option class="cash-flow-form-container__box--option" value="Entrada">Entrada</option>
+                <option class="cash-flow-form-container__box--option" value="Saída">Saída</option>
+            </select>
+        </div>
+    </form> -->
+    <table class="cash-flow-table__table">
+        <thead class="cash-flow-table__header">
+            <tr class="cash-flow-table__row">
+                <th class="cash-flow-table__cell">
+                    <label class="cash-flow-table__checkbox">
+                        <input type="checkbox" class="cash-flow-table__checkbox--input" [checked]="checkedAll"
+                            (change)="handleCheckedAll($event)" />
+                        <span class="cash-flow-table__checkbox--box"></span>
+                    </label>
+                </th>
+                <th class="cash-flow-table__cell">#</th>
+                <th class="cash-flow-table__cell">Data</th>
+                <th class="cash-flow-table__cell">Descrição</th>
+                <th class="cash-flow-table__cell">Entrada/Saida</th>
+                <th class="cash-flow-table__cell">Valor</th>
+                <th class="cash-flow-table__cell">Cotação</th>
+                <th class="cash-flow-table__cell"></th>
+                <th class="cash-flow-table__cell"></th>
+            </tr>
+        </thead>
+        <tbody class="cash-flow-table__body">
+            <tr class="cash-flow-table__row" *ngFor="let item of table; let index = index"
+                [ngClass]="{'cash-flow-table__row--white': index % 2 === 0}">
+                <td class="cash-flow-table__cell">
+                    <label class="cash-flow-table__checkbox">
+                        <input type="checkbox" class="cash-flow-table__checkbox--input" [checked]="item.selected" />
+                        <span class="cash-flow-table__checkbox--box"></span>
+                    </label>
+                </td>
+                <td class="cash-flow-table__cell">{{index}}</td>
+                <td class="cash-flow-table__cell">{{item.date | date:'dd/MM/yyyy'}} </td>
+                <td class="cash-flow-table__cell">{{item.description}}</td>
+                <td class="cash-flow-table__cell">
+                    <span
+                        [ngClass]="{'cash-flow-table__cell--E': item.status === 'Entrada', 'cash-flow-table__cell--S': item.status !== 'Entrada'}">{{item.status}}</span>
+                </td>
+                <td class="cash-flow-table__cell">{{ item.amount | currency: 'BRL': 'symbol': '1.2-2' }}</td>
+                <td class="cash-flow-table__cell">{{item.quotation | currency: currency: 'symbol': '1.2-2' }}</td>
+                <td class="cash-flow-table__cell"><i class="fa-solid fa-pencil"></i></td>
+                <td class="cash-flow-table__cell"><i class="fa-solid fa-trash"></i></td>
+            </tr>
+        </tbody>  
+    </table>
+</div>

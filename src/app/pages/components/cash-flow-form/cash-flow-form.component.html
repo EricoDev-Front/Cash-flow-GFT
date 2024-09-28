@@ -1,0 +1,31 @@
+<form class="cash-flow-form-container" [formGroup]="formCashFlow" (ngSubmit)="submitForm()">
+    <div class="cash-flow-form-container__box date">
+        <label for="date" class="cash-flow-form-container__box--label">Data de
+            transação</label>
+        <input class="cash-flow-form-container__box--input date" type="date" formControlName="date" name="date">
+    </div>
+    <div class="cash-flow-form-container__box transaction">
+        <label for="transactionType" class="cash-flow-form-container__box--label">Tipo da transação</label>
+        <select formControlName="transactionType" name="transactionType" type="text"
+            class="cash-flow-form-container__box--select">
+            <option disabled selected hidden>Entrada/Saída</option>
+            <option class="cash-flow-form-container__box--option" value="Entrada">Entrada</option>
+            <option class="cash-flow-form-container__box--option" value="Saída">Saída</option>
+        </select>
+    </div>
+    <div class="cash-flow-form-container__box amount">
+        <label for="amount" class="cash-flow-form-container__box--label">valor</label>
+        <input formControlName="amount" name="amount" type="text" currencyMask
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" class="cash-flow-form-container__box--input"
+            placeholder="R$0,00">
+    </div>
+    <div class="cash-flow-form-container__box description">
+        <label for="description" class="cash-flow-form-container__box--label">descrição</label>
+        <input formControlName="description" name="description" type="text"
+            class="cash-flow-form-container__box--input " placeholder="Digite a descrição aqui...">
+    </div>
+    <button class="cash-flow-form-container__button" type="submit" [disabled]="!formCashFlow.valid">
+        <i class="fa-solid fa-plus"></i>
+        Add Fluxo de Caixa
+    </button>
+</form>
