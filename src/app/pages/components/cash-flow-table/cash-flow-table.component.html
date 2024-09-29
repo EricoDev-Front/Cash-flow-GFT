@@ -1,15 +1,21 @@
 <div class="cash-flow-table">
-    <!-- <form class="cash-flow-table-container" [formGroup]="formTable">
+    <form class="cash-flow-table-container" [formGroup]="formTable">
         <div class="cash-flow-table-container__box">
-            <label for="amount" class="cash-flow-form-container__box--label">valor</label>
-            <select formControlName="transactionType" name="transactionType" type="text"
-                class="cash-flow-form-container__box--select">
-                <option disabled selected hidden>Entrada/Saída</option>
-                <option class="cash-flow-form-container__box--option" value="Entrada">Entrada</option>
-                <option class="cash-flow-form-container__box--option" value="Saída">Saída</option>
+            <label for="date" class="cash-flow-table-container__box--label">Data de
+                transação</label>
+            <input formControlName="date" class="cash-flow-table-container__box--input date" type="month"
+                placeholder="AAAA-MM" formControlName="date" name="date">
+        </div>
+        <div class="cash-flow-table-container__box">
+            <label for="quotationCurrency" class="cash-flow-table-container__box--label">Moeda</label>
+            <select formControlName="quotationCurrency" name="quotationCurrency" type="text"
+                class="cash-flow-table-container__box--select">
+                <option disabled selected hidden>USD</option>
+                <option *ngFor="let item of currencyList; let i = index" class="cash-flow-table-container__box--option"
+                    [value]="item.value">{{ item.label }}</option>
             </select>
         </div>
-    </form> -->
+    </form>
     <table class="cash-flow-table__table">
         <thead class="cash-flow-table__header">
             <tr class="cash-flow-table__row">
@@ -51,6 +57,38 @@
                 <td class="cash-flow-table__cell"><i class="fa-solid fa-pencil"></i></td>
                 <td class="cash-flow-table__cell"><i class="fa-solid fa-trash"></i></td>
             </tr>
-        </tbody>  
+        </tbody>
     </table>
+
+    <div class="cash-flow-table__footer">
+        <p class="cash-flow-table__footer--text">1-10 of 97</p>
+        <div class="cash-flow-table__paginator">
+            <div>
+                <p class="cash-flow-table__footer--text">Linhas por página: 10</p>
+            </div>
+            <span class="cash-flow-table__footer--text"><i class="fa-solid fa-arrow-left"></i></span>
+            <span class="cash-flow-table__footer--text">1/10 </span>
+            <span class="cash-flow-table__footer--text"><i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+    </div>
 </div>
+
+<!-- const selectElement = document.getElementById('currencySelect');
+      const originalTexts = [];
+
+      selectElement.addEventListener('focus', function () {
+        for (let i = 0; i < this.options.length; i++) {
+          const option = this.options[i];
+          originalTexts[i] = option.text; // Store original text
+          const rate = option.getAttribute('value');
+          option.classList.add('align-right');
+          option.text = `${option.text} - ${rate}`;
+        }
+      });
+
+      selectElement.addEventListener('blur', function () {
+        for (let i = 0; i < this.options.length; i++) {
+          const option = this.options[i];
+          option.text = originalTexts[i]; // Restore original text
+        }
+      }); -->

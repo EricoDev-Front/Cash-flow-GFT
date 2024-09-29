@@ -17,7 +17,7 @@ export class CashFlowFormComponent implements OnInit {
   }
 
   public submitForm(): void {
-      this.$submitFormEmitter.emit(this.formCashFlow.value)
+    this.$submitFormEmitter.emit(this.formCashFlow.value)
   }
 
   private createForm(): void{

@@ -1,8 +1,8 @@
 export interface IAllCurrencies {
-    [key: string]: Currency
+    [key: string]: ICurrency
 }
 
-export interface Currency {
+export interface ICurrency {
     code: string
     codein: string
     name: string
@@ -14,4 +14,9 @@ export interface Currency {
     ask: string
     timestamp: string
     create_date: string
+}
+
+export interface ICurrencyOption {
+    label: string;
+    value: string
 }
