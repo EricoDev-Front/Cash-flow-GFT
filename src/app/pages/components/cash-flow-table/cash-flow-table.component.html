@@ -89,6 +89,11 @@
     </div>
 </div>
 
+<div class="cash-flow-table__modal" *ngIf="showModalReload">
+    <h3 class="cash-flow-table__modal--title">Ocorreu um erro durante a solicitação das moedas.</h3>
+    <button class="cash-flow-table__modal--button-primary" type="button" (click)="reloadPage()">Recarregar</button>
+</div>
+
 <div class="cash-flow-table__modal" *ngIf="showModalDeleteOne">
     <button class="cash-flow-table__modal--close" (click)="toggleModal()">x</button>
     <h3 class="cash-flow-table__modal--title">Você tem certeza que deseja continuar?</h3>

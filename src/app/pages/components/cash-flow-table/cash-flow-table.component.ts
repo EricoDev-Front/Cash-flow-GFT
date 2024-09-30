@@ -46,6 +46,7 @@ export class CashFlowTableComponent implements OnInit {
   protected showModalDeleteOne = false;
   protected showModalDeleteAll = false;
   protected showEditModal  = false;
+  protected showModalReload  = false;
   protected itemSelected!: number;
 
   get lastItemIndex() {
@@ -98,14 +99,14 @@ export class CashFlowTableComponent implements OnInit {
               value: response[currency].bid
             }
           })
-        )
+        ),  
       )
         .subscribe({
           next: (response) => {
             this.currencyList = response;
           },
           error: (error) => {
-
+            this.showModalReload = true;
           }
         })
     });
@@ -202,6 +203,10 @@ export class CashFlowTableComponent implements OnInit {
 
   public toggleModalAll(): void {
     this.showModalDeleteAll = !this.showModalDeleteAll;
+  }
+
+  public reloadPage(): void {
+    window.location.reload();
   }
 
   public selectItemExclude(index: number): void {
