@@ -1,5 +1,4 @@
 .cash-flow-table {
-    width: 80%;
     margin: 0 auto;
     border: 1px solid var(--primary-bg-input);
     background: var(--stripes);
@@ -234,7 +233,7 @@
 }
 
 .cash-flow-table__modal--close{
-    margin-left: 100%;
+    margin-left: 90%;
     font-size: 27px;
     color: red;
     cursor: pointer;
@@ -352,72 +351,77 @@ input[type="date" i] {
 
 @media (max-width: 800px) {
     .cash-flow-table {
-        width: 100%; /* Ajusta a tabela para ocupar 100% da largura */
-        padding: 10px; /* Diminui o padding */
-        overflow-x: auto; /* Permite rolagem horizontal se necessário */
+        padding: 10px;
+    }
+    
+    .cash-flow-table__box--overflow{
+        overflow-x: auto;
     }
 
     .cash-flow-table-container {
         flex-direction: column;
-        padding: 16px;
     }
 
     .cash-flow-table__row {
-        height: auto; /* Ajusta a altura da linha para auto */
+        height: aut
     }
 
     .cash-flow-table__header .cash-flow-table__cell,
     .cash-flow-table__cell {
-        font-size: 10px; /* Diminui o tamanho da fonte */
-        padding: 5px; /* Diminui o padding das células */
+        font-size: 10px;
+        padding: 5px;
     }
 
     .cash-flow-table__cell--E,
     .cash-flow-table__cell--S {
-        font-size: 10px; /* Ajusta o tamanho da fonte para as células de estado */
-        padding: 5px; /* Ajusta o padding */
+        font-size: 10px;
+        padding: 5px;
     }
 
     .cash-flow-table__checkbox--box {
-        width: 15px; /* Diminui o tamanho da checkbox */
+        width: 15px;
         height: 15px;
     }
 
     .cash-flow-table__footer {
-        flex-direction: column; /* Muda para coluna se necessário */
-        align-items: center; /* Centraliza o conteúdo */
+        flex-direction: column;
+        align-items: center;
     }
 
     .cash-flow-table__paginator {
-        width: 100%; /* Ajusta o paginator para ocupar toda a largura */
-        justify-content: center; /* Centraliza os botões de paginação */
+        width: 100%;
     }
 
     .cash-flow-table__modal {
-        width: 90%; /* Ajusta a largura do modal */
-        padding: 10px; /* Diminui o padding do modal */
+        width: 90%;
+        padding: 10px;
     }
 
     .cash-flow-table__modal--title,
     .cash-flow-table__modal--button-primary,
     .cash-flow-table__modal--button-secondary {
-        font-size: 14px; /* Ajusta o tamanho da fonte */
+        font-size: 14px;
+    }
+
+    .cash-flow-table-container__box {
+        width: 100%;
+        margin-bottom: 20px;
     }
 
     .cash-flow-form-container__box--label {
-        font-size: 10px; /* Diminui o tamanho das labels */
-        margin-bottom: 5px; /* Reduz a margem inferior */
+        font-size: 10px;
+        margin-bottom: 5px;
     }
 
     .cash-flow-form-container__box--input,
     .cash-flow-form-container__box--select {
-        height: 28px; /* Diminui a altura dos inputs */
-        font-size: 12px; /* Diminui o tamanho da fonte dos inputs */
+        height: 28px;
+        font-size: 12px;
     }
 
     .cash-flow-form-container__button {
-        width: 100%; /* Botões ocupam 100% da largura */
-        margin-top: 10px; /* Espaço entre botões */
-        height: 28px; /* Diminui a altura do botão */
+        width: 100%;
+        margin-top: 10px;
+        height: 28px;
     }
 }
