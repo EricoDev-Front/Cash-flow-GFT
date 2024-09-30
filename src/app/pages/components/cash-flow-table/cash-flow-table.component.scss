@@ -12,6 +12,16 @@
     border-collapse: collapse
 }
 
+.cash-flow-table__body--no-transactions-message {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--label);
+    margin-top: 30px;
+    text-transform: uppercase;
+    text-align: center;
+
+}
+
 .cash-flow-table__row--white {
     background: var(--white);
 }
@@ -58,8 +68,8 @@
 }
 
 .cash-flow-table__checkbox--input:checked+.cash-flow-table__checkbox--box {
-    background-color: #007BFF;
-    border-color: #007BFF;
+    background-color: var(--primary);
+    border-color: var(--primary);
 }
 
 .cash-flow-table__checkbox--box::after {
@@ -103,6 +113,7 @@
 .fa-trash {
     color: var(--negative);
 }
+
 .cash-flow-table-container {
     border-radius: 5px;
     border: 1px solid var(--primary-bg-input);
@@ -120,8 +131,16 @@
     width: 20%;
 }
 
+.cash-flow-table-container__box--label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--label);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
 
-.cash-flow-table-container__box--input.date  {
+
+.cash-flow-table-container__box--input.date {
     border-radius: 5px;
     border: 1px solid var(--primary-bg-input);
     height: 32px;
@@ -137,18 +156,20 @@
     padding: 0px 10px;
 }
 
-.cash-flow-table-container__box--select:focus, .cash-flow-table-container__box--input:focus {
+.cash-flow-table-container__box--select:focus,
+.cash-flow-table-container__box--input:focus {
     outline: none;
     border: 1px solid var(--primary);
 }
 
-.cash-flow-table__paginator{
+.cash-flow-table__paginator {
     display: flex;
     align-items: center;
     width: 30%;
     justify-content: space-between;
 }
-.cash-flow-table__footer{
+
+.cash-flow-table__footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -156,7 +177,247 @@
     margin-top: 12px;
 }
 
-.cash-flow-table__footer--text{
+.cash-flow-table__footer--text {
     font-size: 12px;
     color: var(--text);
+}
+
+.align-right {
+    text-align: end;
+}
+
+.cash-flow-table-container__box--selected {
+    color: var(--label);
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 10px;
+}
+
+.cash-flow-table-container__box--trash {
+    padding: 5px;
+    background-color: var(--stripes);
+    border-radius: 5px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--grey);
+    cursor: pointer;
+}
+
+.cash-flow-table-container__delete {
+    display: flex;
+    align-items: center;
+}
+
+.cash-flow-table__modal {
+    width: 300px;
+    z-index: 9999;
+    margin: 0px auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+.cash-flow-table__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 5;
+}
+
+.cash-flow-table__modal--close{
+    margin-left: 100%;
+    font-size: 27px;
+    color: red;
+    cursor: pointer;
+    background-color: var(--white);
+}
+
+.cash-flow-table__modal--title{
+    text-align: center;
+    color: var(--label);
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.cash-flow-table__modal--button-primary{
+    width: 40%;
+    background: var(--primary);
+    color: var(--white);
+    height: 32px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10%;
+}
+
+.cash-flow-table__modal--button-secondary{
+    width: 40%;
+    background: var(--negative);
+    color: var(--white);
+    height: 32px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10%;
+}
+
+.cash-flow-form-container {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cash-flow-form-container__box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.cash-flow-form-container__box--label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--label);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.cash-flow-form-container__box--select {
+    border-radius: 5px;
+    border: 1px solid var(--primary-bg-input);
+    height: 32px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+    padding: 0px 10px;
+}
+
+.cash-flow-form-container__box--input {
+    border-radius: 5px;
+    border: 1px solid var(--primary-bg-input);
+    height: 32px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+    padding: 0px 10px;
+}
+
+.cash-flow-form-container__box--select:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+}
+
+.cash-flow-form-container__box--input:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+}
+
+.cash-flow-form-container__box {
+    margin-top: 25px;
+    width: 90%;
+}
+
+
+input[type="date" i] {
+    font-family: "Inter", sans-serif !important;
+}
+
+.cash-flow-form-container__button {
+    width: 15%;
+    background: var(--primary);
+    color: var(--white);
+    height: 32px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cash-flow-form-container__button:disabled {
+    background: var(--grey);
+    cursor: no-drop;
+    color: var(--black);
+    font-family: "Inter", sans-serif;
+}
+
+.cash-flow-form-container__button-box{
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+}
+
+@media (max-width: 800px) {
+    .cash-flow-table {
+        width: 100%; /* Ajusta a tabela para ocupar 100% da largura */
+        padding: 10px; /* Diminui o padding */
+        overflow-x: auto; /* Permite rolagem horizontal se necessário */
+    }
+
+    .cash-flow-table-container {
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .cash-flow-table__row {
+        height: auto; /* Ajusta a altura da linha para auto */
+    }
+
+    .cash-flow-table__header .cash-flow-table__cell,
+    .cash-flow-table__cell {
+        font-size: 10px; /* Diminui o tamanho da fonte */
+        padding: 5px; /* Diminui o padding das células */
+    }
+
+    .cash-flow-table__cell--E,
+    .cash-flow-table__cell--S {
+        font-size: 10px; /* Ajusta o tamanho da fonte para as células de estado */
+        padding: 5px; /* Ajusta o padding */
+    }
+
+    .cash-flow-table__checkbox--box {
+        width: 15px; /* Diminui o tamanho da checkbox */
+        height: 15px;
+    }
+
+    .cash-flow-table__footer {
+        flex-direction: column; /* Muda para coluna se necessário */
+        align-items: center; /* Centraliza o conteúdo */
+    }
+
+    .cash-flow-table__paginator {
+        width: 100%; /* Ajusta o paginator para ocupar toda a largura */
+        justify-content: center; /* Centraliza os botões de paginação */
+    }
+
+    .cash-flow-table__modal {
+        width: 90%; /* Ajusta a largura do modal */
+        padding: 10px; /* Diminui o padding do modal */
+    }
+
+    .cash-flow-table__modal--title,
+    .cash-flow-table__modal--button-primary,
+    .cash-flow-table__modal--button-secondary {
+        font-size: 14px; /* Ajusta o tamanho da fonte */
+    }
+
+    .cash-flow-form-container__box--label {
+        font-size: 10px; /* Diminui o tamanho das labels */
+        margin-bottom: 5px; /* Reduz a margem inferior */
+    }
+
+    .cash-flow-form-container__box--input,
+    .cash-flow-form-container__box--select {
+        height: 28px; /* Diminui a altura dos inputs */
+        font-size: 12px; /* Diminui o tamanho da fonte dos inputs */
+    }
+
+    .cash-flow-form-container__button {
+        width: 100%; /* Botões ocupam 100% da largura */
+        margin-top: 10px; /* Espaço entre botões */
+        height: 28px; /* Diminui a altura do botão */
+    }
 }

@@ -18,5 +18,6 @@ export interface ICurrency {
 
 export interface ICurrencyOption {
     label: string;
-    value: string
+    acronym: string;
+    value: string;
 }

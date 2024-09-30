@@ -1,2 +1,2 @@
 <app-cash-flow-form ($submitFormEmitter)="saveCashFlow($event)"></app-cash-flow-form>
-<app-cash-flow-table></app-cash-flow-table>
+<app-cash-flow-table ($tableUpdated)="onTableUpdated($event)" [setTable]="cashFlowData"></app-cash-flow-table>

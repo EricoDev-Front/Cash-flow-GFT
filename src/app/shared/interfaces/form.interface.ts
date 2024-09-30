@@ -1,5 +1,5 @@
 export interface IFormCashFlow {
-    transaction: string;
+    transactionType: string;
     amount: number;
     description: string;
     date: string;

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { QuotationService } from 'src/app/core/services/quotation.service';
 import { IFormCashFlow } from 'src/app/shared/interfaces/form.interface';
+import { ITable } from 'src/app/shared/interfaces/table.interface';
 
 @Component({
   selector: 'app-cash-flow',
@@ -9,12 +10,26 @@ import { IFormCashFlow } from 'src/app/shared/interfaces/form.interface';
 })
 export class CashFlowComponent implements OnInit {
 
-  constructor(private readonly _quotationService: QuotationService) { }
+  public cashFlowData: ITable[] = [];
+
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  public saveCashFlow(form: IFormCashFlow): void{
-    console.log("FORM ===", form)
+  public saveCashFlow(form: IFormCashFlow): void {
+    this.cashFlowData = [
+      ...this.cashFlowData,
+      {
+        selected: false,
+        quotation: 0,
+        ...form,
+      },
+    ];
   }
+
+  public onTableUpdated(updatedTable: ITable[]) {
+    this.cashFlowData = updatedTable;
+  }
+
 }

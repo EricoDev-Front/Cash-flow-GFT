@@ -1,5 +1,9 @@
 <div class="cash-flow-table">
     <form class="cash-flow-table-container" [formGroup]="formTable">
+        <div class="cash-flow-table-container__delete" *ngIf="counterSelectedRows() > 0" (click)="toggleModalAll()">
+            <p class="cash-flow-table-container__box--selected">{{counterSelectedRows()}} selecionados</p>
+            <div class="cash-flow-table-container__box--trash"><i class="fa-solid fa-trash"></i></div>
+        </div>
         <div class="cash-flow-table-container__box">
             <label for="date" class="cash-flow-table-container__box--label">Data de
                 transação</label>
@@ -10,15 +14,14 @@
             <label for="quotationCurrency" class="cash-flow-table-container__box--label">Moeda</label>
             <select formControlName="quotationCurrency" name="quotationCurrency" type="text"
                 class="cash-flow-table-container__box--select">
-                <option disabled selected hidden>USD</option>
                 <option *ngFor="let item of currencyList; let i = index" class="cash-flow-table-container__box--option"
-                    [value]="item.value">{{ item.label }}</option>
+                    [value]="quotationCurrencyValueFormatter(item)">{{ item.label + ' ' + item.value}}</option>
             </select>
         </div>
     </form>
     <table class="cash-flow-table__table">
         <thead class="cash-flow-table__header">
-            <tr class="cash-flow-table__row">
+            <tr *ngIf="filteredTable.length > 0" class="cash-flow-table__row">
                 <th class="cash-flow-table__cell">
                     <label class="cash-flow-table__checkbox">
                         <input type="checkbox" class="cash-flow-table__checkbox--input" [checked]="checkedAll"
@@ -37,11 +40,13 @@
             </tr>
         </thead>
         <tbody class="cash-flow-table__body">
-            <tr class="cash-flow-table__row" *ngFor="let item of table; let index = index"
+            <tr class="cash-flow-table__row"
+                *ngFor="let item of filteredTable | slice: startIndex: endIndex; let index = index"
                 [ngClass]="{'cash-flow-table__row--white': index % 2 === 0}">
                 <td class="cash-flow-table__cell">
                     <label class="cash-flow-table__checkbox">
-                        <input type="checkbox" class="cash-flow-table__checkbox--input" [checked]="item.selected" />
+                        <input type="checkbox" class="cash-flow-table__checkbox--input" [checked]="item.selected"
+                            (change)="changeItemSelected(item)" />
                         <span class="cash-flow-table__checkbox--box"></span>
                     </label>
                 </td>
@@ -50,45 +55,86 @@
                 <td class="cash-flow-table__cell">{{item.description}}</td>
                 <td class="cash-flow-table__cell">
                     <span
-                        [ngClass]="{'cash-flow-table__cell--E': item.status === 'Entrada', 'cash-flow-table__cell--S': item.status !== 'Entrada'}">{{item.status}}</span>
+                        [ngClass]="{'cash-flow-table__cell--E': item.transactionType === 'Entrada', 'cash-flow-table__cell--S': item.transactionType !== 'Entrada'}">{{item.transactionType}}</span>
                 </td>
                 <td class="cash-flow-table__cell">{{ item.amount | currency: 'BRL': 'symbol': '1.2-2' }}</td>
-                <td class="cash-flow-table__cell">{{item.quotation | currency: currency: 'symbol': '1.2-2' }}</td>
-                <td class="cash-flow-table__cell"><i class="fa-solid fa-pencil"></i></td>
-                <td class="cash-flow-table__cell"><i class="fa-solid fa-trash"></i></td>
+                <td class="cash-flow-table__cell">{{item.quotation | currency: currency: 'symbol': '1.2-4' }}</td>
+                <td class="cash-flow-table__cell" (click)="toggleEditModal(); selectItemEdit(item, index)"><i
+                        class="fa-solid fa-pencil"></i></td>
+                <td class="cash-flow-table__cell" (click)="toggleModal(); selectItemExclude(index)"><i
+                        class="fa-solid fa-trash"></i></td>
             </tr>
         </tbody>
     </table>
 
-    <div class="cash-flow-table__footer">
-        <p class="cash-flow-table__footer--text">1-10 of 97</p>
+    <div *ngIf="filteredTable.length === 0" class="cash-flow-table__body--no-transactions-message">
+        <p>Não há transações para este mês.</p>
+    </div>
+
+    <div *ngIf="filteredTable.length > 0" class="cash-flow-table__footer">
+        <p class="cash-flow-table__footer--text">{{ (currentPage - 1) * 5 + 1 }} - {{ lastItemIndex }} of {{
+            filteredTable.length }}</p>
         <div class="cash-flow-table__paginator">
             <div>
-                <p class="cash-flow-table__footer--text">Linhas por página: 10</p>
+                <p class="cash-flow-table__footer--text">Linhas por página: 5</p>
             </div>
-            <span class="cash-flow-table__footer--text"><i class="fa-solid fa-arrow-left"></i></span>
-            <span class="cash-flow-table__footer--text">1/10 </span>
-            <span class="cash-flow-table__footer--text"><i class="fa-solid fa-arrow-right"></i></span>
+            <span class="cash-flow-table__footer--text" (click)="goToPage(currentPage - 1)"><i
+                    class="fa-solid fa-arrow-left"></i></span>
+            <span class="cash-flow-table__footer--text">{{ currentPage }}/{{ totalPages }}</span>
+            <span class="cash-flow-table__footer--text" (click)="goToPage(currentPage + 1)"><i
+                    class="fa-solid fa-arrow-right"></i></span>
         </div>
     </div>
 </div>
 
-<!-- const selectElement = document.getElementById('currencySelect');
-      const originalTexts = [];
+<div class="cash-flow-table__modal" *ngIf="showModalDeleteOne">
+    <button class="cash-flow-table__modal--close" (click)="toggleModal()">x</button>
+    <h3 class="cash-flow-table__modal--title">Você tem certeza que deseja continuar?</h3>
+    <button class="cash-flow-table__modal--button-primary" type="button" (click)="deleteItem()">Sim</button>
+    <button class="cash-flow-table__modal--button-secondary" type="button" (click)="toggleModal()">Não</button>
+</div>
 
-      selectElement.addEventListener('focus', function () {
-        for (let i = 0; i < this.options.length; i++) {
-          const option = this.options[i];
-          originalTexts[i] = option.text; // Store original text
-          const rate = option.getAttribute('value');
-          option.classList.add('align-right');
-          option.text = `${option.text} - ${rate}`;
-        }
-      });
+<div class="cash-flow-table__modal" *ngIf="showModalDeleteAll">
+    <button class="cash-flow-table__modal--close" (click)="toggleModalAll()">x</button>
+    <h3 class="cash-flow-table__modal--title">Você tem certeza que deseja continuar?</h3>
+    <button class="cash-flow-table__modal--button-primary" type="button" (click)="deleteAllItems()">Sim</button>
+    <button class="cash-flow-table__modal--button-secondary" type="button" (click)="toggleModalAll()">Não</button>
+</div>
 
-      selectElement.addEventListener('blur', function () {
-        for (let i = 0; i < this.options.length; i++) {
-          const option = this.options[i];
-          option.text = originalTexts[i]; // Restore original text
-        }
-      }); -->
+<div class="cash-flow-table__modal" *ngIf="showEditModal">
+    <button class="cash-flow-table__modal--close" (click)="toggleEditModal()">x</button>
+    <form class="cash-flow-form-container" [formGroup]="formCashFlow">
+        <div class="cash-flow-form-container__box date">
+            <label for="date" class="cash-flow-form-container__box--label">Data de
+                transação</label>
+            <input class="cash-flow-form-container__box--input date" type="date" formControlName="date" name="date">
+        </div>
+        <div class="cash-flow-form-container__box transaction">
+            <label for="transactionType" class="cash-flow-form-container__box--label">Tipo da transação</label>
+            <select formControlName="transactionType" name="transactionType" type="text"
+                class="cash-flow-form-container__box--select">
+                <option disabled selected hidden>Entrada/Saída</option>
+                <option class="cash-flow-form-container__box--option" value="Entrada">Entrada</option>
+                <option class="cash-flow-form-container__box--option" value="Saída">Saída</option>
+            </select>
+        </div>
+        <div class="cash-flow-form-container__box amount">
+            <label for="amount" class="cash-flow-form-container__box--label">valor</label>
+            <input formControlName="amount" name="amount" type="text" currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" class="cash-flow-form-container__box--input"
+                placeholder="R$0,00">
+        </div>
+        <div class="cash-flow-form-container__box description">
+            <label for="description" class="cash-flow-form-container__box--label">descrição</label>
+            <input formControlName="description" name="description" type="text"
+                class="cash-flow-form-container__box--input " placeholder="Digite a descrição aqui...">
+        </div>
+    </form>
+    <div class="cash-flow-form-container__button-box">
+        <button class="cash-flow-table__modal--button-primary" type="submit" (click)="editItemModal()">Salvar</button>
+        <button class="cash-flow-table__modal--button-secondary" type="button"
+            (click)="toggleEditModal()">Cancelar</button>
+    </div>
+</div>
+
+<div class="cash-flow-table__overlay" *ngIf="showModalDeleteOne || showModalDeleteAll || showEditModal"></div>

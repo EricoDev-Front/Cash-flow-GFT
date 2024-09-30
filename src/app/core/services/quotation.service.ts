@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { ECurrency } from 'src/app/shared/enums/currency.enum';
-import { IAllCurrencies } from 'src/app/shared/interfaces/currency.interface';
+import { IAllCurrencies, ICurrency, ICurrencyOption } from 'src/app/shared/interfaces/currency.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class QuotationService {
 
   public getAllQuotation(): Observable<IAllCurrencies> {
     return this._http.get<IAllCurrencies>(`${this.baseUrl}/all`).pipe(
-      catchError(error => throwError(() => error))
+      catchError(error => throwError(() => error)),
     );
   }
 
@@ -24,6 +24,6 @@ export class QuotationService {
       catchError(error => throwError(() => error))
     );
   }
-  
+
 
 }

@@ -83,3 +83,32 @@ input[type="date" i] {
     color: var(--black);
     font-family: "Inter", sans-serif;
 }
+
+@media (max-width: 800px) {
+    .cash-flow-form-container {
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .cash-flow-form-container__box.transaction,
+    .cash-flow-form-container__box.description,
+    .cash-flow-form-container__box.amount,
+    .cash-flow-form-container__box.date {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .cash-flow-form-container__button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .cash-flow-form-container__box--label {
+        font-size: 10px;
+    }
+
+    .cash-flow-form-container__box--select,
+    .cash-flow-form-container__box--input {
+        height: 40px;
+    }
+}

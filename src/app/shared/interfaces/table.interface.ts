@@ -1,7 +1,7 @@
 export interface ITable {
     selected: boolean;
     date: string;
-    status: string;
+    transactionType: string;
     amount: number;
     description: string;
     quotation: number;
