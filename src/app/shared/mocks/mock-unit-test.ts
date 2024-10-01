@@ -18,3 +18,8 @@ export const mockArray: ITable[] = Array.from({ length: 30 }, (_, index) => ({
     description: `Item ${index + 1}`,
     quotation: Math.floor(Math.random() * 100) + 1,
 }));
+
+
+export const mockITable: ITable[] = Array.from({ length: 30 }, (_, index) => (
+    {selected: true, date: '2024-11-18', transactionType: 'Entrada', amount: 310, description: 'Item 27', quotation: 52.10084033613445}
+));

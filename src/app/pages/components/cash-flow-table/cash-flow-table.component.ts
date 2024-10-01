@@ -155,6 +155,7 @@ export class CashFlowTableComponent implements OnInit {
   }
 
   public goToPage(pageNumber: number): void {
+    console.log('ericooo',this.totalPages)
     if (pageNumber >= 1 && pageNumber <= this.totalPages) {
       this.currentPage = pageNumber;
     }
