@@ -20,7 +20,7 @@ export class CashFlowFormComponent implements OnInit {
     this.$submitFormEmitter.emit(this.formCashFlow.value)
   }
 
-  private createForm(): void{
+  private createForm(): void {
     this.formCashFlow = this._formBuilder.group({
       transactionType: ['', [Validators.required]],
       amount: ['', [Validators.required]],

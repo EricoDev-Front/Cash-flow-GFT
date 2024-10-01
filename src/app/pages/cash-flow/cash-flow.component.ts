@@ -8,14 +8,11 @@ import { ITable } from 'src/app/shared/interfaces/table.interface';
   templateUrl: './cash-flow.component.html',
   styleUrls: ['./cash-flow.component.scss']
 })
-export class CashFlowComponent implements OnInit {
+export class CashFlowComponent {
 
   public cashFlowData: ITable[] = [];
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   public saveCashFlow(form: IFormCashFlow): void {
     this.cashFlowData = [
@@ -28,7 +25,7 @@ export class CashFlowComponent implements OnInit {
     ];
   }
 
-  public onTableUpdated(updatedTable: ITable[]) {
+  public onTableUpdated(updatedTable: ITable[]): void {
     this.cashFlowData = updatedTable;
   }
 

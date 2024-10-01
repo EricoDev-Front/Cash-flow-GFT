@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { timer } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -6,7 +6,6 @@ import { QuotationService } from 'src/app/core/services/quotation.service';
 import { ECurrency } from 'src/app/shared/enums/currency.enum';
 import { ICurrencyOption } from 'src/app/shared/interfaces/currency.interface';
 import { ITable } from 'src/app/shared/interfaces/table.interface';
-import { mockArray } from 'src/app/shared/mocks/mock-unit-test';
 
 @Component({
   selector: 'app-cash-flow-table',
@@ -155,7 +154,6 @@ export class CashFlowTableComponent implements OnInit {
   }
 
   public goToPage(pageNumber: number): void {
-    console.log('ericooo',this.totalPages)
     if (pageNumber >= 1 && pageNumber <= this.totalPages) {
       this.currentPage = pageNumber;
     }
